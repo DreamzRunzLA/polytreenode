@@ -1,3 +1,63 @@
 class PolyTreeNode
+    def initialize(value)
+        @value = value
+        @parent = nil
+        @children = []
+    end
 
+    def parent
+        @parent
+    end
+
+    def children
+        @children
+    end
+
+    def value
+        @value
+    end
+
+    def parent=(node)
+        if node == nil
+            @parent = nil
+            return
+        else
+            if @parent != nil
+                temp = @parent
+                @parent = node
+                temp.children.delete(self)
+                if node.children.include?(self) == false
+                    node.children << self
+                end
+            end
+            @parent = node
+            if node.children.include?(self) == false
+                node.children << self
+            end
+        end
+    end
+
+    def add_child(child)
+        if @children.include?(child) == false
+            @children << child
+            child.parent=(self)
+        end
+    end
+
+    def remove_child(child)
+        if @children.include?(child) == false
+            raise 'node is not a child'
+        else
+            @children.delete(child)
+            child.parent=(nil)
+        end
+    end
+
+    def dfs(target_value)
+
+    end
+
+    def bfs(target_value)
+
+    end
 end
