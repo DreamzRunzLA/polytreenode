@@ -71,7 +71,16 @@ class PolyTreeNode
         queue << self
 
         until queue == []
-
+            result = queue.shift
+            if result.value != target_value
+                result.children.each do |child|
+                    queue << child
+                end
+            else
+                return result
+            end
         end
+        return nil
     end
+
 end
